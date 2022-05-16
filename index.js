@@ -15,7 +15,7 @@ let grid = [];
 let closedSet = [];
 let openSet = [];
 
-let cells = 5;
+let cells = 50;
 let cellSize = screenSize / cells;
 
 //fill the grid
@@ -37,6 +37,9 @@ for (let x = 0; x < cells; x++) {
 
 let start = grid[0][0];
 let end = grid[cells - 1][cells - 1];
+
+start.wall = false;
+end.wall = false;
 
 openSet.push(start);
 
