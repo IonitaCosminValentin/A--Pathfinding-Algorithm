@@ -61,7 +61,6 @@ export default function draw(openSet, closedSet, ctx, end, cellSize) {
 
     while (temp.previous != undefined) {
       path.push(temp.previous);
-      console.log(temp);
       temp = temp.previous;
     }
 

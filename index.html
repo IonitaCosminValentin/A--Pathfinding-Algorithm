@@ -18,6 +18,18 @@
   </head>
   <body>
     <canvas id="screen"></canvas>
+    <div id="buttons">
+      <button id="start">Start</button>
+
+      <button id="reset">Reset</button>
+
+      <label for="#select">Number of Cells</label>
+      <select id="select"></select>
+
+      <label for="#number">Slowness (Iterations)</label>
+      <input type="number" id="number" min="0" max="5" value="0" />
+    </div>
+    <script src="./UI.js" type="module"></script>
     <script src="./index.js" type="module"></script>
   </body>
 </html>
