@@ -1,5 +1,6 @@
-import { changeState, reset, reSize, setSpeed } from "./index.js";
+import { changeState, reset, reSize, setSpeed, clientInput } from "./index.js";
 
+let canvas = document.getElementById("screen");
 let startButton = document.getElementById("start");
 let resetButton = document.getElementById("reset");
 let cells = document.getElementById("select");
@@ -32,3 +33,7 @@ resetButton.addEventListener("click", reset);
 cells.addEventListener("change", () => reSize(select.value));
 
 speed.addEventListener("change", () => setSpeed(speed.value));
+
+canvas.addEventListener("click", (e) => {
+  clientInput(e);
+});

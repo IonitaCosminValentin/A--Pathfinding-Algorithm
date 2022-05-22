@@ -14,6 +14,12 @@ function heuristic(a, b) {
 }
 
 export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
+  console.log(end);
+  if (!start || !end) {
+    changeState();
+    return alert("Please Select Start and End Cells");
+  }
+
   if (openSet.length > 0) {
     let bestIndex = 0;
 
@@ -83,7 +89,7 @@ export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
     start.draw(ctx, cellSize, "orange");
     end.draw(ctx, cellSize, "purple");
   } else {
-    alert("Start Point Required");
+    alert("No Available Route");
     changeState();
   }
 }
