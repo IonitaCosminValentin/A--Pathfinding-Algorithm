@@ -1,6 +1,53 @@
 import draw from "./draw.js";
 import Cell from "./Cell.js";
 
+export function changeState() {
+  isRunning = !isRunning;
+  return isRunning;
+}
+
+export function reset() {
+  initialization();
+}
+
+export function reSize(size) {
+  cells = size;
+  initialization();
+  reset();
+}
+
+export function setSpeed(n = 5) {
+  speed = 0;
+  maxSpeed = n;
+}
+
+function clientInput(e) {
+  let posX = Math.floor(e.clientX / cellSize);
+  let posY = Math.floor(e.clientY / cellSize);
+
+  console.log(start, end);
+
+  if (!start) {
+    start = grid[posX][posY];
+    start.wall = false;
+    openSet.push(start);
+    start.draw(ctx, cellSize, "orange");
+    return;
+  } else if (!end) {
+    end = grid[posX][posY];
+    end.wall = false;
+    end.draw(ctx, cellSize, "purple");
+    return;
+  } else {
+    let wall = grid[posX][posY];
+    wall.wall = true;
+    wall.draw(ctx, cellSize);
+    canvas.removeEventListener("click", () =>
+      console.log("event listner gone")
+    );
+  }
+}
+
 let canvas = document.getElementById("screen");
 let screenSize = 700;
 
@@ -24,7 +71,14 @@ let maxSpeed = 5;
 let speed = 0;
 
 function initialization() {
+  start = null;
+  end = null;
+  grid = [];
+  openSet = [];
+  closedSet = [];
+
   ctx.fillStyle = "black";
+
   ctx.clearRect(0, 0, screenSize, screenSize);
   ctx.fillRect(0, 0, screenSize, screenSize);
 
@@ -38,7 +92,6 @@ function initialization() {
     }
   }
 
-  //? Needs some love
   //Calculating the neighbours
   for (let x = 0; x < cells; x++) {
     for (let y = 0; y < cells; y++) {
@@ -46,45 +99,9 @@ function initialization() {
     }
   }
 
-  start = grid[0][0];
-  end = grid[cells - 1][cells - 1];
-
-  start.wall = false;
-  end.wall = false;
-
-  openSet.push(start);
-}
-
-export function changeState() {
-  isRunning = !isRunning;
-  return isRunning;
-}
-
-export function reset() {
-  ctx.fillStyle = "black";
-
-  for (let i = 0; i < openSet.length; i++) {
-    openSet[i].draw(ctx, cellSize);
-  }
-
-  for (let i = 0; i < closedSet.length; i++) {
-    closedSet[i].draw(ctx, cellSize);
-  }
-
-  openSet = [];
-  closedSet = [];
-  openSet.push(start);
-}
-
-export function reSize(size) {
-  cells = size;
-  initialization();
-  reset();
-}
-
-export function setSpeed(n = 5) {
-  speed = 0;
-  maxSpeed = n;
+  canvas.addEventListener("click", (e) => {
+    clientInput(e);
+  });
 }
 
 initialization();
@@ -92,7 +109,7 @@ function gameLoop() {
   if (isRunning) {
     if (speed >= maxSpeed) {
       speed = 0;
-      draw(openSet, closedSet, ctx, end, cellSize);
+      draw(openSet, closedSet, ctx, end, cellSize, start);
     } else speed++;
   }
 

@@ -1,3 +1,5 @@
+import { changeState } from "./index.js";
+
 function deleteFromArray(elem, arr) {
   for (let i = arr.length - 1; i >= 0; i--) {
     if (arr[i] === elem) {
@@ -11,7 +13,7 @@ function heuristic(a, b) {
   return d;
 }
 
-export default function draw(openSet, closedSet, ctx, end, cellSize) {
+export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
   if (openSet.length > 0) {
     let bestIndex = 0;
 
@@ -26,6 +28,7 @@ export default function draw(openSet, closedSet, ctx, end, cellSize) {
 
     if (current === end) {
       console.log("Done!");
+      changeState();
 
       return;
     }
@@ -49,7 +52,9 @@ export default function draw(openSet, closedSet, ctx, end, cellSize) {
           neighbour.g = tempG;
           neighbour.h = heuristic(neighbour, end);
           neighbour.f = neighbour.g + neighbour.h;
+
           neighbour.previous = current;
+
           openSet.push(neighbour);
         }
       }
@@ -57,7 +62,6 @@ export default function draw(openSet, closedSet, ctx, end, cellSize) {
 
     let path = [];
     let temp = current;
-    path.push(temp);
 
     while (temp.previous != undefined) {
       path.push(temp.previous);
@@ -75,7 +79,11 @@ export default function draw(openSet, closedSet, ctx, end, cellSize) {
     for (let i = 0; i < path.length; i++) {
       path[i].draw(ctx, cellSize, "blue");
     }
+
+    start.draw(ctx, cellSize, "orange");
+    end.draw(ctx, cellSize, "purple");
   } else {
-    console.log("There Is No Solution");
+    alert("Start Point Required");
+    changeState();
   }
 }
