@@ -5,19 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>A* Algorithm</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        background-color: gray;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <canvas id="screen"></canvas>
+    <div id="info">
+      <label for="#yellow">Start</label>
+      <div id="yellow"></div>
+
+      <label for="#purple">End</label>
+      <div id="purple"></div>
+
+      <label for="#blue">Path</label>
+      <div id="blue"></div>
+
+      <label for="#Red">Evaluated Cells</label>
+      <div id="red"></div>
+
+      <label for="#green">Next To Be Evaluated</label>
+      <div id="green"></div>
+    </div>
+
+    <div id="clickInfo">
+      <p>
+        First Click - Start <br />
+        Second Click - End <br />
+        Third Click - Wall
+      </p>
+    </div>
+
+    <div id="container">
+      <h1 id="done"></h1>
+      <canvas id="screen"></canvas>
+    </div>
 
     <div id="buttons">
       <button id="start">Start</button>
@@ -27,7 +46,7 @@
       <label for="#select">Number of Cells</label>
       <select id="select"></select>
 
-      <label for="#number">Slowness (Iterations)</label>
+      <label for="#number">Reduce Speed (Iterations)</label>
       <input type="number" id="number" min="0" max="5" value="0" />
     </div>
     <script src="./UI.js" type="module"></script>

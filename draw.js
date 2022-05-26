@@ -14,7 +14,6 @@ function heuristic(a, b) {
 }
 
 export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
-  console.log(end);
   if (!start || !end) {
     changeState();
     return alert("Please Select Start and End Cells");
@@ -33,10 +32,10 @@ export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
     let current = openSet[bestIndex];
 
     if (current === end) {
-      console.log("Done!");
-      changeState();
+      let h1 = document.querySelector("#done");
+      h1.textContent = "Done!";
 
-      return;
+      changeState();
     }
 
     //TODO Fix this?
@@ -73,7 +72,6 @@ export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
       path.push(temp.previous);
       temp = temp.previous;
     }
-
     for (let i = 0; i < openSet.length; i++) {
       openSet[i].draw(ctx, cellSize, "lime");
     }
@@ -86,7 +84,7 @@ export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
       path[i].draw(ctx, cellSize, "blue");
     }
 
-    start.draw(ctx, cellSize, "orange");
+    start.draw(ctx, cellSize, "yellow");
     end.draw(ctx, cellSize, "purple");
   } else {
     alert("No Available Route");

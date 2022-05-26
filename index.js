@@ -7,10 +7,9 @@ export function changeState() {
 }
 
 export function reset() {
-  end.draw(ctx, cellSize);
+  let h1 = document.getElementById("done");
 
-  start = undefined;
-  end = undefined;
+  h1.textContent = "";
 
   for (let i = 0; i < openSet.length; i++) {
     openSet[i].draw(ctx, cellSize);
@@ -25,8 +24,15 @@ export function reset() {
     walls[i].draw(ctx, cellSize);
   }
 
+  if (end) end.draw(ctx, cellSize);
+
+  start = undefined;
+  end = undefined;
+
+  isRunning = false;
   openSet = [];
   closedSet = [];
+  walls = [];
 }
 
 export function reSize(size) {
@@ -40,14 +46,14 @@ export function setSpeed(n = 5) {
 }
 
 export function clientInput(e) {
-  let posX = Math.floor(e.clientX / cellSize);
-  let posY = Math.floor(e.clientY / cellSize);
+  let posX = Math.floor(e.offsetX / cellSize);
+  let posY = Math.floor(e.offsetY / cellSize);
 
   let gridCell = grid[posX][posY];
 
   if (start) {
     if (end) {
-      if (gridCell === end || gridCell === start) return;
+      if (gridCell === end || gridCell === start || isRunning) return;
 
       let wall = gridCell;
       wall.wall = true;
@@ -55,15 +61,15 @@ export function clientInput(e) {
       walls.push(wall);
       wall.draw(ctx, cellSize);
     } else {
+      if (gridCell === start) return;
       end = gridCell;
       end.draw(ctx, cellSize, "purple");
     }
   } else {
     start = gridCell;
     openSet.push(start);
-    start.draw(ctx, cellSize, "orange");
+    start.draw(ctx, cellSize, "yellow");
   }
-  console.log(start, end);
 }
 
 let canvas = document.getElementById("screen");
@@ -75,7 +81,6 @@ canvas.height = screenSize;
 let ctx = canvas.getContext("2d");
 
 let isRunning = false;
-let walls = [];
 
 let grid = [];
 let closedSet = [];
@@ -86,14 +91,22 @@ let cellSize;
 let start;
 let end;
 
+let walls = [];
+
 let maxSpeed = 5;
 let speed = 0;
 
 function initialization() {
   ctx.fillStyle = "black";
 
+  let h1 = document.getElementById("done");
+  h1.textContent = "";
+
+  isRunning = false;
   start = undefined;
   end = undefined;
+  openSet = [];
+  closedSet = [];
 
   ctx.clearRect(0, 0, screenSize, screenSize);
   ctx.fillRect(0, 0, screenSize, screenSize);
