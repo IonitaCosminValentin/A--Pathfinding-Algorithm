@@ -9,8 +9,9 @@ function deleteFromArray(elem, arr) {
 }
 
 function heuristic(a, b) {
-  let d = Math.sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y));
-  return d;
+  return Math.floor(
+    Math.sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y))
+  );
 }
 
 export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
@@ -29,6 +30,7 @@ export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
         bestIndex = i;
       }
     }
+
     let current = openSet[bestIndex];
 
     if (current === end) {
@@ -68,10 +70,11 @@ export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
     let path = [];
     let temp = current;
 
-    while (temp.previous != undefined) {
+    while (temp.previous) {
       path.push(temp.previous);
       temp = temp.previous;
     }
+
     for (let i = 0; i < openSet.length; i++) {
       openSet[i].draw(ctx, cellSize, "lime");
     }

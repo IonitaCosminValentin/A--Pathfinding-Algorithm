@@ -2,6 +2,7 @@ import draw from "./draw.js";
 import Cell from "./Cell.js";
 
 export function changeState() {
+  if (closedSet.includes(end) && !isRunning) return;
   isRunning = !isRunning;
   return isRunning;
 }
@@ -26,13 +27,11 @@ export function reset() {
 
   if (end) end.draw(ctx, cellSize);
 
+  isRunning = false;
   start = undefined;
   end = undefined;
-
-  isRunning = false;
   openSet = [];
   closedSet = [];
-  walls = [];
 }
 
 export function reSize(size) {
