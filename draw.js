@@ -9,9 +9,7 @@ function deleteFromArray(elem, arr) {
 }
 
 function heuristic(a, b) {
-  return Math.floor(
-    Math.sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y))
-  );
+  return Math.sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y));
 }
 
 export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
@@ -19,6 +17,8 @@ export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
     changeState();
     return alert("Please Select Start and End Cells");
   }
+
+  let path = [];
 
   if (openSet.length > 0) {
     let bestIndex = 0;
@@ -36,7 +36,6 @@ export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
     if (current === end) {
       let h1 = document.querySelector("#done");
       h1.textContent = "Done!";
-
       changeState();
     }
 
@@ -54,6 +53,7 @@ export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
         if (openSet.includes(neighbour)) {
           if (tempG < neighbour.g) {
             neighbour.g = tempG;
+            break;
           }
         } else {
           neighbour.g = tempG;
@@ -61,15 +61,12 @@ export default function draw(openSet, closedSet, ctx, end, cellSize, start) {
           neighbour.f = neighbour.g + neighbour.h;
 
           neighbour.previous = current;
-
           openSet.push(neighbour);
         }
       }
     }
 
-    let path = [];
     let temp = current;
-
     while (temp.previous) {
       path.push(temp.previous);
       temp = temp.previous;

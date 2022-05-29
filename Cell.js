@@ -13,8 +13,6 @@ export default class Cell {
   draw(ctx, size, col = "rgb(255,255,255)") {
     ctx.fillStyle = col;
 
-    //ctx.clearRect(this.x * size, this.y * size, size - 1, size - 1);
-
     if (this.wall) ctx.fillStyle = "rgb(10,10,10)";
 
     ctx.fillRect(this.x * size, this.y * size, size - 1, size - 1);

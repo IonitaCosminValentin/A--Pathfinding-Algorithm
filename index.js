@@ -14,10 +14,12 @@ export function reset() {
 
   for (let i = 0; i < openSet.length; i++) {
     openSet[i].draw(ctx, cellSize);
+    openSet[i].previous = undefined;
   }
 
   for (let i = 0; i < closedSet.length; i++) {
     closedSet[i].draw(ctx, cellSize);
+    closedSet[i].previous = undefined;
   }
 
   for (let i = 0; i < walls.length; i++) {
@@ -39,7 +41,7 @@ export function reSize(size) {
   initialization();
 }
 
-export function setSpeed(n = 5) {
+export function setSpeed(n) {
   speed = 0;
   maxSpeed = n;
 }
@@ -92,7 +94,7 @@ let end;
 
 let walls = [];
 
-let maxSpeed = 5;
+let maxSpeed = 0;
 let speed = 0;
 
 function initialization() {
