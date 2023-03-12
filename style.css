@@ -72,6 +72,9 @@ p {
 }
 
 @media screen and (max-width: 810px) {
+  html {
+    overflow: auto;
+  }
   #clickInfo {
     top: 800px;
   }
@@ -83,7 +86,7 @@ p {
     grid-template-columns: 25% 25% 25% 25%;
   }
 }
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 450px) {
   html {
     overflow: auto;
   }
