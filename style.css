@@ -71,21 +71,6 @@ p {
   background-color: lime;
 }
 
-@media screen and (max-width: 810px) {
-  html {
-    overflow: auto;
-  }
-  #clickInfo {
-    top: 800px;
-  }
-  #info {
-    top: 800px;
-    left: 50%;
-
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-  }
-}
 @media screen and (max-width: 800px) {
   html {
     overflow: auto;
