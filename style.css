@@ -86,7 +86,7 @@ p {
     grid-template-columns: 25% 25% 25% 25%;
   }
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 800px) {
   html {
     overflow: auto;
   }
