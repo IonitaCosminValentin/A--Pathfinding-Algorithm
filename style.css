@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: gray;
+  background-color: rgb(202, 202, 202);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,61 +18,68 @@ p {
 }
 
 #done {
-  min-height: 40px;
   text-align: center;
 }
 
 #screen {
+  margin-top: 10px;
   background-color: white;
+  box-shadow: 0px 0px 150px rgb(129, 129, 129);
+  border: 1px solid black;
+  border-bottom: none;
+  border-right: none;
 }
 
 #clickInfo {
   position: absolute;
-  top: 10%;
-  left: 1%;
-
-  align-self: flex-start;
+  top: 100px;
+  left: 20px;
 }
 
 #info {
   position: absolute;
-  top: 20%;
-  left: 1%;
-
-  align-self: flex-start;
+  top: 200px;
+  left: 20px;
 }
 
-#yellow {
-  width: 50px;
-  height: 50px;
-  background-color: yellow;
-  margin-bottom: 10px;
-}
-
-#purple {
-  width: 50px;
-  height: 50px;
-  background-color: purple;
-  margin-bottom: 10px;
-}
-
-#blue {
-  width: 50px;
-  height: 50px;
-  background-color: blue;
-  margin-bottom: 10px;
-}
-
-#red {
-  width: 50px;
-  height: 50px;
-  background-color: red;
-  margin-bottom: 10px;
-}
-
+#yellow,
+#purple,
+#blue,
+#red,
 #green {
   width: 50px;
   height: 50px;
-  background-color: lime;
   margin-bottom: 10px;
+}
+#yellow {
+  background-color: yellow;
+}
+
+#purple {
+  background-color: purple;
+}
+
+#blue {
+  background-color: blue;
+}
+
+#red {
+  background-color: red;
+}
+
+#green {
+  background-color: lime;
+}
+
+@media screen and (max-width: 810px) {
+  #clickInfo {
+    top: 800px;
+  }
+  #info {
+    top: 800px;
+    left: 50%;
+
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+  }
 }
