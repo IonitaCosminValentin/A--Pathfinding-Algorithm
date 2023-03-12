@@ -77,6 +77,14 @@ export function clientInput (e) {
 let canvas = document.getElementById('screen')
 let screenSize = 700
 
+if (
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  )
+) {
+  screenSize = window.innerWidth - 50
+}
+
 canvas.width = screenSize
 canvas.height = screenSize
 
